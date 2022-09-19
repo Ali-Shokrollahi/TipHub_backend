@@ -12,7 +12,7 @@ WORKDIR /code
 # Install dependencies
 RUN pip install --upgrade pip
 RUN mkdir requirements
-COPY ../requirements/ /code/requirements
+COPY ./requirements/ /code/requirements
 RUN pip install -r /code/requirements/dev.txt
 
 # Copy project
