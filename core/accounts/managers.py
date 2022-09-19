@@ -45,16 +45,16 @@ class UserManager(BaseUserManager):
 class StudentManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(type=User.Role.STUDENT)
+        return results.filter(role="STU")
 
 
 class TeacherManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(type=User.Role.TEACHER)
+        return results.filter(role="TEA")
 
 
 class StaffManager(BaseUserManager):
     def get_queryset(self, *args, **kwargs):
         results = super().get_queryset(*args, **kwargs)
-        return results.filter(type=User.Role.STAFF)
+        return results.filter(role="STA")
