@@ -24,7 +24,7 @@ def rename_profile(instance, filename):
     return os.path.join(upload_to, filename)
 
 
-class User(TimeStampedModel, AbstractBaseUser, PermissionsMixin):
+class User(AbstractBaseUser, PermissionsMixin,TimeStampedModel):
     """
     A custom user model that uses email for authentication instead of username.
     """
@@ -35,6 +35,7 @@ class User(TimeStampedModel, AbstractBaseUser, PermissionsMixin):
         STUDENT = "STU", "student"
 
     base_type = Role.STUDENT
+
     role = models.CharField(_("Role"), max_length=3, choices=Role.choices, default=Role.STUDENT)
     # authentication field
     email = models.EmailField(_("email address"), unique=True)
