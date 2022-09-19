@@ -5,7 +5,6 @@ services:
     build: core/.
     ports:
       - "8000:8000"
-
     depends_on:
       - db
     command: python manage.py runserver 0.0.0.0:8000
@@ -13,8 +12,7 @@ services:
       - ./core:/code
 
   db:
-    container_name: db
-    image: postgres:14
+    image: postgres:13
     volumes:
       - postgres_data:/var/lib/postgresql/data/
     environment:
