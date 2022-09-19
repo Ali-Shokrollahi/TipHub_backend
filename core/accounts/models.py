@@ -90,6 +90,10 @@ class Student(User):
     class Meta:
         proxy = True
 
+    @property
+    def extra(self):
+        return self.staffprofile
+
 
 class Teacher(User):
     # This sets the user type to TEACHER during record creation
@@ -100,6 +104,10 @@ class Teacher(User):
     class Meta:
         proxy = True
 
+    @property
+    def extra(self):
+        return self.teacherprofile
+
 
 class Staff(User):
     # This sets the user type to TEACHER during record creation
@@ -109,3 +117,7 @@ class Staff(User):
 
     class Meta:
         proxy = True
+
+    @property
+    def extra(self):
+        return self.staffprofile
