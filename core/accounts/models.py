@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from utils.models import TimeStampedModel
 
-from .managers import UserManager, StudentManager, TeacherManager, StaffManager
+from .managers import StaffManager, StudentManager, TeacherManager, UserManager
 
 
 def rename_profile(instance, filename):
@@ -24,7 +24,7 @@ def rename_profile(instance, filename):
     return os.path.join(upload_to, filename)
 
 
-class User(AbstractBaseUser, PermissionsMixin,TimeStampedModel):
+class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     """
     A custom user model that uses email for authentication instead of username.
     """
@@ -63,6 +63,7 @@ class User(AbstractBaseUser, PermissionsMixin,TimeStampedModel):
     def __str__(self):
         return self.email
 
+    @property
     def get_full_name(self):
         """
         Return the first_name plus the last_name, with a space in between.
