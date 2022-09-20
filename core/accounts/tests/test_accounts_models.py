@@ -31,6 +31,8 @@ class CustomUserTest(TestCase):
         self.assertFalse(user.email_verified)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
+        self.assertEqual(user.extra.user.email, "teststudent@email.com")
+        self.assertEqual(user.extra.user.id, user.id)
 
     def test_teacher_user(self):
         user = Teacher.objects.get(email="testteacher@email.com")
@@ -44,6 +46,8 @@ class CustomUserTest(TestCase):
         self.assertFalse(user.email_verified)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
+        self.assertEqual(user.extra.user.email, "testteacher@email.com")
+        self.assertEqual(user.extra.user.id, user.id)
 
     def test_staff_user(self):
         user = Staff.objects.get(email="teststaff@email.com")
@@ -57,6 +61,8 @@ class CustomUserTest(TestCase):
         self.assertFalse(user.email_verified)
         self.assertTrue(user.is_staff)
         self.assertFalse(user.is_superuser)
+        self.assertEqual(user.extra.user.email, "teststaff@email.com")
+        self.assertEqual(user.extra.user.id, user.id)
 
     def test_rename_profile(self):
         filename = "ali.sh.jpg"

@@ -85,7 +85,7 @@ class Student(User):
 
     @property
     def extra(self):
-        return self.staffprofile
+        return self.studentprofile
 
 
 class Teacher(User):
