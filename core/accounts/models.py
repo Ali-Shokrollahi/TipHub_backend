@@ -8,7 +8,7 @@ from django.utils.translation import gettext_lazy as _
 
 from utils.models import TimeStampedModel
 
-from .managers import UserManager, StudentManager, TeacherManager, StaffManager
+from .managers import StaffManager, StudentManager, TeacherManager, UserManager
 
 
 def rename_profile(instance, filename):

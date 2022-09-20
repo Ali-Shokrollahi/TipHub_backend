@@ -1,5 +1,6 @@
-from utils.models import TimeStampedModel
 from django.db import models
+
+from utils.models import TimeStampedModel
 
 
 class StudentProfile(TimeStampedModel):
