@@ -1,6 +1,7 @@
 from django.test import TestCase
-from accounts.models import Student, Teacher, Staff
-from profiles.models import StudentProfile, TeacherProfile, StaffProfile
+
+from accounts.models import Staff, Student, Teacher
+from profiles.models import StaffProfile, StudentProfile, TeacherProfile
 
 
 class StudentProfileTest(TestCase):

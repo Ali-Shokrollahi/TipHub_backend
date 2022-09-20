@@ -1,5 +1,6 @@
 from django.contrib import admin
-from .models import StudentProfile, TeacherProfile, StaffProfile
+
+from .models import StaffProfile, StudentProfile, TeacherProfile
 
 
 class StudentProfileAdmin(admin.ModelAdmin):
