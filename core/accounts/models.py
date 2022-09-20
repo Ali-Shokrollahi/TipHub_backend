@@ -2,7 +2,6 @@ import os
 from uuid import uuid4
 
 from django.contrib.auth.models import AbstractBaseUser, PermissionsMixin
-from django.contrib.auth.validators import UnicodeUsernameValidator
 from django.db import models
 from django.utils.translation import gettext_lazy as _
 
@@ -40,17 +39,9 @@ class User(AbstractBaseUser, PermissionsMixin, TimeStampedModel):
     # authentication field
     email = models.EmailField(_("email address"), unique=True)
     # fields
-    username_validator = UnicodeUsernameValidator()
-    username = models.CharField(_("username"), max_length=32, unique=True,
-                                validators=[username_validator],
-                                error_messages={
-                                    "unique": _("A user with that username already exists."),
-                                },
-                                )
-
     first_name = models.CharField(_("first name"), max_length=32, blank=True)
     last_name = models.CharField(_("last name"), max_length=32, blank=True)
-    phone_number = models.CharField(_("phone number"), max_length=11, blank=True)
+    phone_number = models.CharField(_("phone number"), max_length=11, null=True, blank=True, unique=True)
     image = models.ImageField(_("image"), upload_to=rename_profile, default="default_user.png", null=True, blank=True)
     # authorization fields
     is_active = models.BooleanField(_("active"), default=False)
@@ -94,7 +85,7 @@ class Student(User):
 
     @property
     def extra(self):
-        return self.staffprofile
+        return self.studentprofile
 
 
 class Teacher(User):

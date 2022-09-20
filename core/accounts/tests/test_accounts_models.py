@@ -7,15 +7,15 @@ class CustomUserTest(TestCase):
 
     def setUp(self):
         User.objects.create_user(
-            email="teststudent@email.com", password="testpass123", username="test121", first_name="test",
+            email="teststudent@email.com", password="testpass123", first_name="test",
             last_name="tester", phone_number="09011111111", image="default.png"
         )
         User.objects.create_user(
-            email="testteacher@email.com", password="testpass123", username="test122", first_name="test",
+            email="testteacher@email.com", password="testpass123", first_name="test",
             last_name="tester", phone_number="09011111112", image="default.png", role="TEA"
         )
         User.objects.create_user(
-            email="teststaff@email.com", password="testpass123", username="test123", first_name="test",
+            email="teststaff@email.com", password="testpass123", first_name="test",
             last_name="tester", phone_number="09011111113", image="default.png", role="STA"
         )
 
@@ -23,7 +23,6 @@ class CustomUserTest(TestCase):
         user = Student.objects.get(email="teststudent@email.com")
 
         self.assertEqual(user.email, "teststudent@email.com")
-        self.assertEqual(user.username, "test121")
         self.assertEqual(user.get_full_name, "test tester")
         self.assertEqual(user.phone_number, "09011111111")
         self.assertEqual(user.image, "default.png")
@@ -32,12 +31,13 @@ class CustomUserTest(TestCase):
         self.assertFalse(user.email_verified)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
+        self.assertEqual(user.extra.user.email, "teststudent@email.com")
+        self.assertEqual(user.extra.user.id, user.id)
 
     def test_teacher_user(self):
         user = Teacher.objects.get(email="testteacher@email.com")
 
         self.assertEqual(user.email, "testteacher@email.com")
-        self.assertEqual(user.username, "test122")
         self.assertEqual(user.get_full_name, "test tester")
         self.assertEqual(user.phone_number, "09011111112")
         self.assertEqual(user.image, "default.png")
@@ -46,12 +46,13 @@ class CustomUserTest(TestCase):
         self.assertFalse(user.email_verified)
         self.assertFalse(user.is_staff)
         self.assertFalse(user.is_superuser)
+        self.assertEqual(user.extra.user.email, "testteacher@email.com")
+        self.assertEqual(user.extra.user.id, user.id)
 
     def test_staff_user(self):
         user = Staff.objects.get(email="teststaff@email.com")
 
         self.assertEqual(user.email, "teststaff@email.com")
-        self.assertEqual(user.username, "test123")
         self.assertEqual(user.get_full_name, "test tester")
         self.assertEqual(user.phone_number, "09011111113")
         self.assertEqual(user.image, "default.png")
@@ -60,6 +61,8 @@ class CustomUserTest(TestCase):
         self.assertFalse(user.email_verified)
         self.assertTrue(user.is_staff)
         self.assertFalse(user.is_superuser)
+        self.assertEqual(user.extra.user.email, "teststaff@email.com")
+        self.assertEqual(user.extra.user.id, user.id)
 
     def test_rename_profile(self):
         filename = "ali.sh.jpg"
@@ -69,14 +72,13 @@ class CustomUserTest(TestCase):
 
     def test_create_superuser(self):
         user = User.objects.create_superuser(
-            email="testadmin@email.com", password="testpass123", username="testadmin123", first_name="testadmin",
-            last_name="testeradmin", phone_number="09011111111", image="default.png"
+            email="testadmin@email.com", password="testpass123", first_name="testadmin",
+            last_name="testeradmin", phone_number="09011111114", image="default.png"
         )
 
         self.assertEqual(user.email, "testadmin@email.com")
-        self.assertEqual(user.username, "testadmin123")
         self.assertEqual(user.get_full_name, "testadmin testeradmin")
-        self.assertEqual(user.phone_number, "09011111111")
+        self.assertEqual(user.phone_number, "09011111114")
         self.assertEqual(user.role, "STA")
         self.assertTrue(user.is_active)
         self.assertTrue(user.email_verified)

@@ -13,7 +13,7 @@ class UserAdmin(BaseUserAdmin):
         ('Dates', {'fields': ('created', 'modified', 'last_login')}),
         ('Authentication', {'fields': ('email', 'password')}),
         ('Permissions', {'fields': ('is_active', 'email_verified', 'role')}),
-        ('Personal info', {'fields': ('first_name', 'last_name', 'phone_number', 'username', 'image')}),
+        ('Personal info', {'fields': ('first_name', 'last_name', 'phone_number', 'image')}),
         ('Group and Permissions', {'fields': ('groups', 'user_permissions')}),
 
     )
